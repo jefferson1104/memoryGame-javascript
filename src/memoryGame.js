@@ -8,6 +8,10 @@ class MemoryGame {
       {img: './images/spider-man.png', name: 'spider-man'},
       {img: './images/hawkeye.png', name: 'hawkeye'},
     ]
+
+    this.defaultIcon = './images/standard.png'
+
+    this.hiddenHeroes = []
   }
 
   // para utilizar o this, nao podemos usar o static
@@ -31,6 +35,26 @@ class MemoryGame {
     .sort(() => Math.random() - 0.5)
 
     this.screen.updateImages(copies)
+
+    // esperar 1 segundo para atualizar a tela
+    setTimeout(() => {
+      this.hideHeroes(copies)
+    }, 1000);
+  }
+
+  hideHeroes(heroes) {
+    // vamos trocar a imagem de todos os herois existentes pelo icone padrão
+    const heroesHidden = heroes.map(({ name, id }) => ({
+      id,
+      name,
+      img: this.defaultIcon
+    }))
+
+    // atualizar a tela com os herois ocultos
+    this.screen.updateImages(heroesHidden)
+    
+    // guardamos os herois para trabalhar com eles depois
+    this.heroesHidden = heroesHidden
   }
 
   play() {
