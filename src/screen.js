@@ -1,13 +1,13 @@
-const ID_CONTENT = "content";
+const ID_CONTENT = "content"
+const ID_BTN_PLAY = "playGame"
 class Screen {
   static getHtmlCode(item) {
     return ` 
-    <div class="col-md-3">
+    <div class="col-md-3 mb-4">
       <div class="card" style="width: 50%;">
         <img src="${item.img}" name="${item.name}" class="card-img-top" alt="...">
       </div>
     </div>
-    <br />
     `
   }
 
@@ -24,5 +24,10 @@ class Screen {
   static updateImages(items) {
     const htmlCode = Screen.generateHtmlStringByImage(items)
     Screen.updateContentHtml(htmlCode)
+  }
+
+  static configurePlayButton(functionOnClick) {
+    const btnPlay = document.getElementById(ID_BTN_PLAY)
+    btnPlay.onclick = functionOnClick
   }
 }
