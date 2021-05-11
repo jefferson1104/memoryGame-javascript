@@ -4,11 +4,15 @@ class Screen {
   static getHtmlCode(item) {
     return ` 
     <div class="col-md-3 mb-4">
-      <div class="card" style="width: 50%;">
+      <div class="card" style="width: 50%;" onclick="window.checkSelection('${item.id}','${item.name}' )">
         <img src="${item.img}" name="${item.name}" class="card-img-top" alt="...">
       </div>
     </div>
     `
+  }
+
+  static configureCheckSelectionButton(functionOnClick) {
+    window.checkSelection = functionOnClick
   }
 
   static updateContentHtml(htmlCode) {
