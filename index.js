@@ -25,7 +25,7 @@ window.addEventListener("scroll", function(){
 
   setTimeout(function(){ 
     const invisible = document.querySelector('.buttons')
-    invisible.classList.toggle('visible', window.scrollY > 0)  
+    invisible.classList.toggle('visible', window.scrollY > 0)
    }, 1000);
 })
 

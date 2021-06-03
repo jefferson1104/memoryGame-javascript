@@ -8,7 +8,7 @@
 }
 
 body {
-  min-height: 800px;
+  min-height: 1000px;
   background: #2c2c54;
 }
 
@@ -321,8 +321,11 @@ section {
 /* RESPONSIVE LAYOUT */
 @media (max-width: 991px) {
   header {
-    padding: 40px;
+    padding: 60px;
     background: #7d5fff;
+  }
+  section {
+    padding: 0;
   }
 
   header.sticky .logo {
@@ -365,7 +368,7 @@ section {
 
   header.sticky .toggleMenu {
     position: fixed;
-    top: 15px;
+    top: 35px;
     right: 40px;
     width: 50px;
     height: 50px;
