@@ -7,6 +7,7 @@ const ID_MESSAGE = "message"
 const CLASS_INVISIBLE = "invisible"
 const ID_LOADING = "loading"
 const ID_COUNTER = "counter"
+const ID_BTN_SHOW_ALL = "showAll"
 
 const MESSAGES = {
   success: {
@@ -91,5 +92,33 @@ class Screen {
     }
 
     loading.classList.add(CLASS_INVISIBLE)
+  }
+
+  static startCounter() {
+    let countTo = 3
+    const elementCounter = document.getElementById(ID_COUNTER)
+
+    // vamos substituir o texto, no lugar de '$$counter' adicionaremos o valor do segundo
+    const identifierInText = "$$counter"
+    const textDefault = `Starting at ${identifierInText} seconds...`
+
+    // criando uma funcao em linha onde atualizaremos o texto a cada segundo
+    const updateText = () => (elementCounter.innerHTML = textDefault.replace(identifierInText, countTo--))
+
+    // a cada segundo a funcao updateText vai ser chamada e essa funcao vai substituir '$$couter' por 'countTo' diminuindo o valor
+    // retornamos o 'idOfInterval' para parar, vamos trabalhar com ele no proximo metodo
+    updateText()
+    const idOfInterval = setInterval(updateText, 1000)
+    return idOfInterval
+  }
+
+  static clearCounter(idOfInterval) {
+    clearInterval(idOfInterval)
+    document.getElementById(ID_COUNTER).innerHTML = ""
+  }
+
+  static configureButtonShowAll(functionOnClick) {
+    const btnShowAll = document.getElementById(ID_BTN_SHOW_ALL)
+    btnShowAll.onclick = functionOnClick
   }
 }

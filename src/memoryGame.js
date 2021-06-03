@@ -26,6 +26,7 @@ class MemoryGame {
     // força a screen a usar o THIS de MemoryGame
     this.screen.configurePlayButton(this.play.bind(this))
     this.screen.configureCheckSelectionButton(this.checkSelection.bind(this))
+    this.screen.configureButtonShowAll(this.showHiddenHeroes.bind(this))
   }
 
   async shuffle() {
@@ -45,8 +46,14 @@ class MemoryGame {
     // mostrando o loading
     this.screen.showLoading()
 
-    // esperar 1 segundo para atualizar a tela
-    await this.util.timeout(1000)
+    // contador do loading
+    const idOfInterval = this.screen.startCounter()
+
+    // esperar 3 segundo para atualizar a tela
+    await this.util.timeout(3000)
+
+    // limpar contador do loading
+    this.screen.clearCounter(idOfInterval)
 
     // esconder os herois
     this.hideHeroes(copies)
@@ -67,7 +74,7 @@ class MemoryGame {
     this.screen.updateImages(heroesHidden)
 
     // guardamos os herois para trabalhar com eles depois
-    this.heroesHidden = heroesHidden
+    this.hiddenHeroes = heroesHidden
   }
 
   showHeroes(heroName) {
@@ -111,6 +118,17 @@ class MemoryGame {
         this.screen.showMessage(false)
         break;
     }
+  }
+
+  showHiddenHeroes() {
+    // pegando todos os herois da tela e colocar seu respectivo valor correto
+    const hiddenHeroes = this.hiddenHeroes
+    for (const heroes of hiddenHeroes) {
+      const { img } = this.initialHeroes.find(item => item.name === heroes.name)
+      heroes.img = img
+    }
+
+    this.screen.updateImages(hiddenHeroes)
   }
 
   play() {
