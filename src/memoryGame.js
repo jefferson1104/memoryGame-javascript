@@ -1,6 +1,7 @@
 class MemoryGame {
-  constructor ({ screen }) {
+  constructor ({ screen, util }) {
     this.screen = screen
+    this.util = util
 
     this.initialHeroes = [
       {img: './images/batman.png', name: 'batman'},
@@ -9,6 +10,7 @@ class MemoryGame {
       {img: './images/ciclops.png', name: 'ciclops'},
       {img: './images/dead-pool.png', name: 'dead-pool'},
       {img: './images/thor.png', name: 'thor'},
+      
     ]
 
     this.defaultIcon = './images/standard.png'
@@ -26,7 +28,7 @@ class MemoryGame {
     this.screen.configureCheckSelectionButton(this.checkSelection.bind(this))
   }
 
-  shuffle() {
+  async shuffle() {
     const copies = this.initialHeroes
     // duplicar os itens
     .concat(this.initialHeroes)
@@ -37,12 +39,20 @@ class MemoryGame {
     // ordenar aleatóriamente
     .sort(() => Math.random() - 0.5)
 
+    // atualizando as imagens
     this.screen.updateImages(copies)
 
+    // mostrando o loading
+    this.screen.showLoading()
+
     // esperar 1 segundo para atualizar a tela
-    setTimeout(() => {
-      this.hideHeroes(copies)
-    }, 1000);
+    await this.util.timeout(1000)
+
+    // esconder os herois
+    this.hideHeroes(copies)
+
+    // esconder o loading
+    this.screen.showLoading(false)
   }
 
   hideHeroes(heroes) {

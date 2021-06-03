@@ -1,7 +1,12 @@
+// Metodos estaticos nao podem acessar o 'this' , por isso nao vamos colocar util no constructor
+const util = Util
+
 const ID_CONTENT = "content"
 const ID_BTN_PLAY = "playGame"
 const ID_MESSAGE = "message"
 const CLASS_INVISIBLE = "invisible"
+const ID_LOADING = "loading"
+const ID_COUNTER = "counter"
 
 const MESSAGES = {
   success: {
@@ -57,7 +62,7 @@ class Screen {
     htmlElement.forEach(item => (item.src = img))
   }
 
-  static showMessage(success = true) {
+  static async showMessage(success = true) {
     const element = document.getElementById(ID_MESSAGE)
 
     if (success) {
@@ -72,5 +77,19 @@ class Screen {
     }
 
     element.classList.remove(CLASS_INVISIBLE)
+    
+    await util.timeout(1000)
+    element.classList.add(CLASS_INVISIBLE)
+  }
+
+  static showLoading(show = true) {
+    const loading = document.getElementById(ID_LOADING)
+
+    if (show) {
+      loading.classList.remove(CLASS_INVISIBLE)
+      return;
+    }
+
+    loading.classList.add(CLASS_INVISIBLE)
   }
 }

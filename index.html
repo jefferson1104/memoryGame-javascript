@@ -12,24 +12,34 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
 
   <script src="./index.js"></script>
+  <script src="./src/util.js"></script>
   <script src="./src/memoryGame.js"></script>
   <script src="./src/screen.js"></script>
 </head>
 <body class="container-fluid">
   <br />
+
   <div class="row container-fluid">
     <button type="button" class="btn btn-success" id="playGame">Click here to start</button>
     <button type="button" class="btn btn-danger" id="showAll">Show all</button>
   </div>
   <br />
+
+  <div id="loading" class="container-fluid d-flex align-items-center invisible">
+    <strong id="counter">Starting at 1... </strong>
+    <div class="spinner-border text-primary m-1" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <br />
+
   <div class="row container-fluid">
     <div id='message' class="alert alert-danger invisible" role="alert">
       Combinação!
     </div>
   </div>
-  <br />
-  <div id="content" class="row">
 
+  <div id="content" class="row">
   </div>
 </body>
 </html>
