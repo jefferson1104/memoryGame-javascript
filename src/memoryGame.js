@@ -6,11 +6,9 @@ class MemoryGame {
       {img: './images/batman.png', name: 'batman'},
       {img: './images/flash.png', name: 'flash'},
       {img: './images/spider-man.png', name: 'spider-man'},
-      {img: './images/hawkeye.png', name: 'hawkeye'},
-      {img: './images/ant-man.png', name: 'ant-man'},
+      {img: './images/ciclops.png', name: 'ciclops'},
       {img: './images/dead-pool.png', name: 'dead-pool'},
       {img: './images/thor.png', name: 'thor'},
-      {img: './images/ciclops.png', name: 'ciclops'},
     ]
 
     this.defaultIcon = './images/standard.png'
@@ -62,6 +60,14 @@ class MemoryGame {
     this.heroesHidden = heroesHidden
   }
 
+  showHeroes(heroName) {
+    // procurando esse heroi pelo nome em initialHeroes, e vamos obter a imagem dele
+    const { img } = this.initialHeroes.find(({ name }) => heroName === name)
+
+    // funcao para exibir somente o heroi selecionado
+    this.screen.showHeroes(heroName, img)
+  }
+
   checkSelection(id, name) {
     const item = { id, name }
 
@@ -82,11 +88,17 @@ class MemoryGame {
 
         // conferir se os herois selecionados são iguais, e tambem uma regra onde nao permite selecionar a mesma carta 2 vezes
         if(option1.name === item.name && option1.id !== item.id) {
-          alert('Exactly combination!' + ' ' + item.name)
+          // funcao que mostra a imagem do herou selecionado quando acertado
+          this.showHeroes(item.name)
+
+          // funcao que mostra a mensagem de correto
+          this.screen.showMessage()
+
           return;
         }
 
-        alert('Incorrect combination!')
+        // funcao que mostra a mensagem de errado
+        this.screen.showMessage(false)
         break;
     }
   }
