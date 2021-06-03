@@ -23,11 +23,9 @@ const MESSAGES = {
 class Screen {
   static getHtmlCode(item) {
     return ` 
-    <div class="col-md-3 mb-4">
-      <div class="card" style="width: 50%;" onclick="window.checkSelection('${item.id}','${item.name}' )">
+      <div class="card" onclick="window.checkSelection('${item.id}','${item.name}' )">
         <img src="${item.img}" name="${item.name}" class="card-img-top" alt="...">
       </div>
-    </div>
     `
   }
 
@@ -79,7 +77,7 @@ class Screen {
 
     element.classList.remove(CLASS_INVISIBLE)
     
-    await util.timeout(1000)
+    await util.timeout(2000)
     element.classList.add(CLASS_INVISIBLE)
   }
 
